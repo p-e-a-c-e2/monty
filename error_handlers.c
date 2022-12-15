@@ -13,6 +13,7 @@ void err(int error_code, ...)
 	va_list ap;
 	char *op;
 	int l_num;
+
 	va_start(ap, error_code);
 	switch (error_code)
 	{
@@ -53,6 +54,7 @@ void more_err(int error_code, ...)
 	va_list ap;
 	char *op;
 	int l_num;
+
 	va_start(ap, error_code);
 	switch (error_code)
 	{

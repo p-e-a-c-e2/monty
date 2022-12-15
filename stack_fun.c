@@ -7,6 +7,7 @@
 void pop_top(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
+
 	if (stack == NULL || *stack == NULL)
 		more_err(7, line_number);
 	temp = *stack;
@@ -30,12 +31,13 @@ void print_top(stack_t **stack, unsigned int line_number)
 
 /**
  * add_to_stack - Adds a node to the stack.
- * @new_node: Pointer to the new node.
+ * @newnode: Pointer to the new node.
  * @ln: Interger representing the line number of of the opcode.
  */
-void add_to_stack(stack_t **newnode, __attribute__((unused))unsigned intln)
+void add_to_stack(stack_t **newnode, __attribute__((unused))unsigned int ln)
 {
 	stack_t *temp;
+
 	if (newnode == NULL || *newnode == NULL)
 		exit(EXIT_FAILURE);
 	if (head == NULL)
