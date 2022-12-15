@@ -10,17 +10,13 @@ void open_file(char *file_name)
 
 	if (file_name == NULL)
 		err(2, file_name);
-	/*Checks if the file exists*/
 	file_check = access(file_name, R_OK);
 	if (file_check == -1)
 		err(2, file_name);
 	fd = fopen(file_name, "r");
 	if (fd == NULL)
 		err(2, file_name);
-
-	/*errors should be handled inside this function*/
 	read_file(fd);
-	/*might need to check for errors on closing a file.*/
 	fclose(fd);
 }
 
@@ -42,8 +38,6 @@ void read_file(FILE *fd)
 
 	if (fd == NULL)
 		err(2, "file_name");
-
-	/*Getting each line in the file*/
 	for (line_n = 1; getline(&lineprt, &n, fd) != EOF; line_n++)
 	{
 		format = interpret_line(lineprt, line_n, format);
@@ -71,8 +65,6 @@ int interpret_line(char *lineptr, int line_number, int format)
 		err(4);
 	delim = "\n ";
 	opcode = strtok(lineptr, delim);
-
-	/*hanlding blank lines*/
 	if (opcode == NULL)
 		return (format);
 	value = strtok(NULL, delim);
@@ -106,24 +98,14 @@ void find_func(char *opcode, char *value, int ln, int format)
 		{"pop", pop_top},
 		{"nop", nop},
 		{"swap", swap_nodes},
-		{"add", add_nodes},
-		{"sub", sub_nodes},
-		{"div", div_nodes},
-		{"mul", mul_nodes},
-		{"mod", mod_nodes},
-		{"pchar", print_char},
-		{"pstr", print_str},
-		{"rotl", rotl},
-		{"rotr", rotr},
+		{"add", add_nodes}
 		{NULL, NULL}
 	};
 
 	if (opcode[0] == '#')
 		return;
-	/*Iterates through list to find the right function*/
 	for (flag = 1, i = 0; func_list[i].opcode != NULL; i++)
 	{
-		/*When 0 found the right opcode*/
 		if (strcmp(opcode, func_list[i].opcode) == 0)
 		{
 			call_fun(func_list[i].f, opcode, value, ln, format);
@@ -152,13 +134,11 @@ void call_fun(op_func f, char *op, char *val, int ln, int format)
 	flag = 1;
 	if (strcmp(op, "push") == 0)
 	{
-		/*Checks if the number is negative and moves the val ptr*/
 		if (val != NULL && val[0] == '-')
 		{
 			val = val + 1;
 			flag = -1;
 		}
-		/*val is not a digit is the return value is 0*/
 		if (val == NULL)
 			err(5, ln);
 		for (i = 0; val[i] != '\0'; i++)
