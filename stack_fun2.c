@@ -18,6 +18,7 @@ void nop(stack_t **stack, unsigned int line_number)
 void swap_nodes(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
+
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 		more_err(8, line_number, "swap");
 	temp = (*stack)->next;
@@ -38,6 +39,7 @@ void swap_nodes(stack_t **stack, unsigned int line_number)
 void add_nodes(stack_t **stack, unsigned int line_number)
 {
 	int sum;
+
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 		more_err(8, line_number, "add");
 	(*stack) = (*stack)->next;
